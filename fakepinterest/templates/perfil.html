@@ -1,0 +1,28 @@
+{% extends "homepage.html" %}
+
+{% block titulo %}
+Perfil - {{ usuario }}
+{% endblock %}
+
+{% block body %}
+<body>
+{% include "navbar.html" %}
+
+<h1>Perfil do user: {{ usuario.username }}</h1>
+
+{% if form %}
+  <form method="POST" enctype="multipart/form-data">
+    {{ form.csrf_token }}
+    {{ form.foto() }}
+    {{ form.botao_confirmacao() }}
+  </form>
+{% endif %}
+
+  {% for foto in usuario.fotos %}
+    <img src="{{url_for('static', filename='fotos_posts/{}'.format(foto.imagem)) }}">
+  {% endfor %}
+
+</body>
+{% endblock %}
+
+
