@@ -1,14 +1,13 @@
 {% extends "homepage.html" %}
 
 {% block titulo %}
-Criar Conta
+FakePinterest - Criar Conta
 {% endblock %}
 
-{% block formulario %}
-
+ {% block formulario %}
 
         <form method="POST" class="popup">
-          {{ form.csrf_token }}
+            {{ form.csrf_token }}
           <svg
             height="40"
             viewBox="-3 -3 82 82"
@@ -27,31 +26,50 @@ Criar Conta
           <h2>Bem-vindo(a) ao FakePinterest</h2>
 
           <div class="div-input">
-            {{ form.email.label(class="label") }}
-            {{ form.email(class="input") }}
+              {{ form.email.label(class="label") }}
+            {% if form.email.errors %}
+              {% for erro in form.email.errors %}
+                  <p style="color: red">{{ erro }}</p>
+              {% endfor %}
+            {% endif %}
+                {{ form.email(class="input") }}
+          </div>
+
+            <div class="div-input">
+              {{ form.username.label(class="label") }}
+              {% if form.username.errors %}
+              {% for erro in form.username.errors %}
+                  <p style="color: red">{{ erro }}</p>
+              {% endfor %}
+            {% endif %}
+                {{ form.username(class="input") }}
           </div>
 
           <div class="div-input">
-            {{ form.username.label(class="label") }}
-            {{ form.username(class="input") }}
-          </div>
-
-
-
-          <div class="div-input">
-
             {{ form.senha.label(class="label") }}
+            {% if form.senha.errors %}
+              {% for erro in form.senha.errors %}
+                  <p style="color: red">{{ erro }}</p>
+              {% endfor %}
+            {% endif %}
             {{ form.senha(class="input") }}
           </div>
 
           <div class="div-input">
             {{ form.confirmar_senha.label(class="label") }}
+            {% if form.confirmar_senha.errors %}
+              {% for erro in form.confirmar_senha.errors %}
+                  <p style="color: red">{{ erro }}</p>
+              {% endfor %}
+            {% endif %}
             {{ form.confirmar_senha(class="input") }}
           </div>
 
+
           <div class="div-botao">
-            {{ form.botao_confirmacao(class="botao-login") }}
-            <a href="{{ url_for('homepage') }}">Já tem uma conta?</a>
+              {{ form.botao_confirmacao(class="botao-login") }}
+            <a href="{{ url_for('homepage') }}" class="link-criarconta">Já tem uma conta? Faça Login</a>
           </div>
+
         </form>
-{% endblock %}
+          {% endblock %}
